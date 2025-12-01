@@ -1,0 +1,16 @@
+# Use the official Python image
+FROM python:3.13-slim-bookworm
+
+# Set the working directory
+WORKDIR /app
+
+# Install dependencies
+COPY requirements.txt .
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt
+# Install debugpy for debugging support
+RUN pip install debugpy
+RUN pip install ruff mypy pytest-cov
+
+# Keep container running for development
+CMD ["sleep", "infinity"]

@@ -1,0 +1,17 @@
+services:
+  api:
+    build:
+      context: ../api
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ../api:/app
+    env_file:
+      - ../.env
+    environment:
+      - PYTHONPATH=/app
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+      - ENVIRONMENT=development
+    ports:
+      - "${API_PORT:-8080}:${API_PORT:-8080}"
+      - "5678:5678" # for debugpy

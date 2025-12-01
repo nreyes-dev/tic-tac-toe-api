@@ -1,0 +1,38 @@
+{
+  "name": "Python API Development",
+  "dockerComposeFile": ["docker-compose.yaml"],
+  "service": "api",
+  "workspaceFolder": "/app",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff",
+        "ms-azuretools.vscode-docker",
+        "aaron-bond.better-comments",
+        "humao.rest-client",
+        "streetsidesoftware.code-spell-checker",
+        "zamerick.vscode-caddyfile-syntax"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.analysis.extraPaths": ["/app"],
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": "always"
+        },
+        "ruff.args": [
+          "--line-length", "150",
+          "--indent-style", "space",
+          "--quote-style", "preserve",
+          "--skip-magic-trailing-comma"
+        ],
+        "python.linting.enabled": false,
+        "python.analysis.typeCheckingMode": "basic"
+      }
+    }
+  }
+}

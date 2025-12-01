@@ -1,0 +1,8 @@
+{env.DOMAIN} {
+  handle_path /api/* {
+    reverse_proxy  api:{env.API_PORT}
+  }
+  tls {
+    dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+  }
+}

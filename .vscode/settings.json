@@ -1,0 +1,20 @@
+{
+    "cSpell.words": [
+        "buildx",
+        "Caddyfile",
+        "charliermarsh",
+        "coloredlogs",
+        "debugpy",
+        "fastapi",
+        "humao",
+        "mypy",
+        "pydantic",
+        "pytest",
+        "PYTHONDONTWRITEBYTECODE",
+        "PYTHONPATH",
+        "PYTHONUNBUFFERED",
+        "starlette",
+        "uvicorn",
+        "zamerick"
+    ]
+}

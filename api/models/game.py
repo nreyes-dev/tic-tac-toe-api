@@ -130,7 +130,7 @@ class Game(BaseModel):
     def add_move(self, move: Coordinate) -> None:
         if move in self.moves:
             raise HTTPException(
-                status_code=400, detail=f"Spot ({move.x}, {move.y}) is already taken."
+                status_code=409, detail=f"Spot ({move.x}, {move.y}) is already taken."
             )
         self.moves.append(move)
 

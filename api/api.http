@@ -1,5 +1,22 @@
 @base_url = http://localhost:8080
 
+### 
+# @name createGame
 POST {{base_url}}/game
 
 ###
+
+@playerId = {{createGame.response.body.$.player_id}}
+@gameId   = {{createGame.response.body.$.game_id}}
+
+### 
+POST {{base_url}}/game/{{gameId}}/move
+Content-Type: application/json
+X-Player-Id: {{playerId}}
+
+{
+  "x": 0,
+  "y": 0
+}
+
+### 

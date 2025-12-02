@@ -53,6 +53,33 @@ async def new_game(player_id: str = Depends(get_player_id)):
         return Response(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+@router.get("/game/{game_id}")
+async def get_game(game_id: str, player_id: str = Depends(get_player_id)):
+    try:
+        # retrieve game and validate that the caller owns it
+        stored_game = await redis_client.read(f"game:{game_id}")
+        if stored_game is None:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Game not found.",
+            )
+        game = Game(**stored_game)
+        if game.player_id != player_id:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="This game belongs to a different player.",
+            )
+        return JSONResponse(
+            content=game.model_dump(),
+            status_code=status.HTTP_200_OK,
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        logging.error(f"Internal Server Error: {e}", exc_info=True)
+        return Response(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 @router.post("/game/{game_id}/move")
 async def make_a_move(
     game_id: str, body: Coordinate, player_id: str = Depends(get_player_id)

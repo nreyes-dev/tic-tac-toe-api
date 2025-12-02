@@ -1,4 +1,6 @@
 @base_url = http://localhost:8080
+# uncomment this to hit the deployed API instead:
+# @base_url = https://tic-tac-toe-api.nreyes.dev/api
 
 ### 
 # @name createGame
@@ -10,6 +12,10 @@ POST {{base_url}}/game
 
 @playerId = {{createGame.response.body.$.player_id}}
 @gameId   = {{createGame.response.body.$.game_id}}
+
+### 
+GET {{base_url}}/game/{{gameId}}
+X-Player-Id: {{playerId}}
 
 ### 
 POST {{base_url}}/game/{{gameId}}/move

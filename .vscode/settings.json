@@ -13,9 +13,12 @@
         "PYTHONDONTWRITEBYTECODE",
         "PYTHONPATH",
         "PYTHONUNBUFFERED",
+        "setex",
         "signup",
         "starlette",
         "uvicorn",
-        "zamerick"
+        "zadd",
+        "zamerick",
+        "zrange"
     ]
 }

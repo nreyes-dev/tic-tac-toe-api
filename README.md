@@ -4,13 +4,13 @@ REST API for playing Noughts and Crosses (a.k.a Tic-tac-toe), built for Ethycaâ€
 ## Instructions on how to run this locally:
 
 Make sure you have Docker installed and running in your system, then do:
-```shell
+```bash
 cp .env.example .env
 docker compose -f docker-compose.dev.yaml up --build -d
 ```
 
 You can look at the logs by doing:
-```shell
+```bash
 docker compose -f docker-compose.dev.yaml logs api -f
 ```
 
@@ -23,3 +23,14 @@ Again, in a real project I would add authentication but that would require a dat
 
 ### Gameplay & Behavior
 It's not explicitly stated whether the player is always supposed to start the game. I decided to randomize whether the player or the CPU makes the first move. Other than that, I pretty much stuck to the basics. The CPU just makes random moves as suggested in the challenge description.
+
+## Run unit tests
+Connect to the running container:
+```bash
+docker exec -it api /bin/bash
+```
+Once inside it, run:
+```bash
+chmod +x tests/run_tests.sh
+./tests/run_tests.sh 
+```

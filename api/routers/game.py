@@ -81,7 +81,7 @@ async def make_a_move(
         game.add_move(body)
 
         # if the game is still ongoing, the CPU responds
-        if game.game_result != "ongoing":
+        if game.game_result == "ongoing":
             game.add_random_move()
 
         # update game store

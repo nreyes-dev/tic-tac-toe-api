@@ -104,26 +104,23 @@ async def make_a_move(
         return Response(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@router.get("/game/{game_id}/history")
-async def get_game_history(game_id: str):
-    # TODO
-    try:
-        return Response(
-            status_code=status.HTTP_501_NOT_IMPLEMENTED,
-        )
-    except HTTPException:
-        raise
-    except Exception as e:
-        logging.error(f"Internal Server Error: {e}", exc_info=True)
-        return Response(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
 @router.get("/game/history")
-async def get_all_games_history():
-    # TODO
+async def get_all_games_history(player_id: str = Depends(get_player_id)):
     try:
-        return Response(
-            status_code=status.HTTP_501_NOT_IMPLEMENTED,
+        game_ids = await redis_client.zrange(f"player:{player_id}:games")
+
+        games: list[dict] = []
+        for id in game_ids:
+            stored_game = await redis_client.read(f"game:{id}")
+            if stored_game is None:
+                # game might have expired (TTL); skip
+                continue
+            game = Game(**stored_game)
+            games.append(game.model_dump())
+
+        return JSONResponse(
+            content={"games": games},
+            status_code=status.HTTP_200_OK,
         )
     except HTTPException:
         raise

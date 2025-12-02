@@ -3,6 +3,8 @@
 ### 
 # @name createGame
 POST {{base_url}}/game
+# uncomment this to create games with the same player
+# X-Player-Id: {{playerId}}
 
 ###
 
@@ -15,8 +17,13 @@ Content-Type: application/json
 X-Player-Id: {{playerId}}
 
 {
-  "x": 0,
-  "y": 0
+  "x": 1,
+  "y": 1
 }
+
+### 
+GET {{base_url}}/game/history
+Content-Type: application/json
+X-Player-Id: {{playerId}}
 
 ### 

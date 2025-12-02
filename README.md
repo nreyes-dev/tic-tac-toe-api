@@ -14,6 +14,13 @@ You can look at the logs by doing:
 docker compose -f docker-compose.dev.yaml logs api -f
 ```
 
+## Player Identification (Important)
+Since this project does not implement authentication (to keep the scope appropriate for the challenge), player identity is tracked using a lightweight mechanism:
+- When you create a game (`POST /game`), if you do not send an `X-Player-Id` header,
+the server will automatically generate a new player ID.
+- Any client (CLI, Postman, REST Client, browser frontend) should store this value and include it as a header
+in subsequent requests.
+
 ## General comments about my thought process when building this
 
 ### Architecture Decisions & Tradeoffs

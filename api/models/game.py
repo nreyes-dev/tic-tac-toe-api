@@ -1,5 +1,6 @@
 import copy
 import random
+import time
 import uuid
 from typing import List, Literal, Optional
 
@@ -40,6 +41,7 @@ class Game(BaseModel):
     moves: List[Coordinate] = Field(
         default=[]
     )  # because the first move is always a cross, this is enough to fully understand the game state
+    created_at: int = Field(default_factory=lambda: int(time.time()))
 
     @computed_field
     @property

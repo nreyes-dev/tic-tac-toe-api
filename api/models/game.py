@@ -1,7 +1,7 @@
 import copy
 import random
 import uuid
-from typing import List, Literal
+from typing import List, Literal, Optional
 
 from fastapi import HTTPException
 from pydantic import BaseModel, Field, computed_field
@@ -71,6 +71,61 @@ class Game(BaseModel):
             for x in range(3)
             if game_state[y][x] == "."
         ]
+
+    @computed_field
+    @property
+    def game_result(self) -> Literal["ongoing", "human won", "CPU won", "draw"]:
+        game_state = self.game_state
+
+        winner_symbol: Optional[str] = None
+
+        # is there a winning row?
+        for row in game_state:
+            if row == ["X", "X", "X"]:
+                winner_symbol = "X"
+                break
+            if row == ["O", "O", "O"]:
+                winner_symbol = "O"
+                break
+
+        # is there a winning column?
+        if winner_symbol is None:
+            columns = [
+                [game_state[0][0], game_state[1][0], game_state[2][0]],
+                [game_state[0][1], game_state[1][1], game_state[2][1]],
+                [game_state[0][2], game_state[1][2], game_state[2][2]],
+            ]
+            for col in columns:
+                if col == ["X", "X", "X"]:
+                    winner_symbol = "X"
+                    break
+                if col == ["O", "O", "O"]:
+                    winner_symbol = "O"
+                    break
+
+        # is there a winning diagonal?
+        if winner_symbol is None:
+            diagonals = [
+                [game_state[0][0], game_state[1][1], game_state[2][2]],
+                [game_state[0][2], game_state[1][1], game_state[2][0]],
+            ]
+            for diag in diagonals:
+                if diag == ["X", "X", "X"]:
+                    winner_symbol = "X"
+                    break
+                if diag == ["O", "O", "O"]:
+                    winner_symbol = "O"
+                    break
+
+        if winner_symbol is not None:
+            if winner_symbol == self.human_plays_as:
+                return "human won"
+            return "CPU won"
+
+        if len(self.available_spots) > 0:
+            return "ongoing"
+
+        return "draw"
 
     def add_move(self, move: Coordinate) -> None:
         if move in self.moves:

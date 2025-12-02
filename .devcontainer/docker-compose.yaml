@@ -15,3 +15,10 @@ services:
     ports:
       - "${API_PORT:-8080}:${API_PORT:-8080}"
       - "5678:5678" # for debugpy
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped

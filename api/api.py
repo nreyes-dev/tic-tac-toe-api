@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 
 from config import settings
-from routers import hello
+from routers import game
 
 app = FastAPI()
 app.add_middleware(
@@ -14,7 +14,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(hello.router)
+app.include_router(game.router)
 
 
 @app.get("/")

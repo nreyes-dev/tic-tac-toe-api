@@ -13,6 +13,7 @@
         "PYTHONDONTWRITEBYTECODE",
         "PYTHONPATH",
         "PYTHONUNBUFFERED",
+        "signup",
         "starlette",
         "uvicorn",
         "zamerick"

@@ -2,6 +2,9 @@
     "cSpell.words": [
         "debugpy",
         "mypy",
-        "pytest"
+        "pytest",
+        "setex",
+        "zadd",
+        "ZRANGE"
     ]
 }

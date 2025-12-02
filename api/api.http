@@ -1,5 +1,5 @@
 @base_url = http://localhost:8080
 
-GET {{base_url}}/hello
+POST {{base_url}}/game
 
 ###

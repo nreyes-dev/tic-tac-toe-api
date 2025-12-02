@@ -14,6 +14,11 @@ You can look at the logs by doing:
 docker compose -f docker-compose.dev.yaml logs api -f
 ```
 
+### Using the `api.http` File (VS Code REST Client)
+This project includes an `api.http` file that makes it very easy to try the API directly from VS Code using the [**REST Client**](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) extension.
+In case you don't this extension: it basically turns a .http file into a mini POSTMAN collection.
+You'll find the three available endpoints there.
+
 ## Player Identification (Important)
 Since this project does not implement authentication (to keep the scope appropriate for the challenge), player identity is tracked using a lightweight mechanism:
 - When you create a game (`POST /game`), if you do not send an `X-Player-Id` header,

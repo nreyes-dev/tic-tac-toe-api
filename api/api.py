@@ -8,7 +8,7 @@ from routers import game
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:4321", f"{settings.deployed_front_domain}"],
+    allow_origins=["http://localhost:5173", f"{settings.deployed_front_domain}"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
